@@ -21,7 +21,7 @@ ignorePorts = false
 publicDir = "public"
 
 [packager]
-language = "bunjs"
+language = "bun"
 
 [packager.features]
 packageSearch = true
