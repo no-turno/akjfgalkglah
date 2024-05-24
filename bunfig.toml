@@ -1,12 +1,7 @@
-jsx = "react-jsxDEV"
+jsx = "react-jsx"
 jsxImportSource = "react"
 telemetry = false
-logLevel = "debug"
-smol = true
 publicPath = "/"
-root = "."
-target = "bun"
-format = "esm"
 
 [define]
 "Bun.__GYOZA_OUTDIR__" = "'.gyoza-cache'"

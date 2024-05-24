@@ -34,19 +34,15 @@ export async function REPLIT_CONFIG(options: {
  * const options = SERVER_OPTIONS({ port: 8080, hostname: "localhost", mode: "development"});
  * @version 1.0.0
  */
-export function SERVER_OPTIONS({
-    port,
-    hostname,
-    mode,
-}: {
-    port?: string | number;
-    hostname?: string;
-    mode?: "production" | "development";
+export function SERVER_OPTIONS(options: {
+    port: string,
+    hostname: string,
+    mode: "development" | "production",
 }) {
     return {
-        port: port ?? FALLBACK_CONSTANTS.PORT,
-        hostname: hostname ?? FALLBACK_CONSTANTS.HOSTNAME,
-        development: FALLBACK_CONSTANTS.IS_DEV(mode),
+        port: options.port,
+        hostname: options.hostname,
+        development: options.mode,
     };
 }
 

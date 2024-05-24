@@ -1,27 +1,39 @@
-import dom from "react-dom/server";
+import { renderToReadableStream } from "react-dom/server";
 import { SERVER_OPTIONS } from "./.gyoza/config";
-import type React from "react";
 
-export const render = async (
-  Component: (props: any) => React.ReactElement<any, any>,
-  req: Request,
-) => {
-  const html = await dom.renderToReadableStream(<Component req={req} />);
+export const render = async (H: () => React.ReactElement, R: Request) => {
+  const html = await renderToReadableStream(<H />);
   await html.allReady;
+  return new Response(html, {
+    headers: {
+      "Content-Type": "text/html",
+    },
+  });
+};
 
-  return new Response(html);
+const options = SERVER_OPTIONS({
+  port: process.env.SERVER_PORT,
+  hostname: process.env.SERVER_HOSTNAME,
+  mode: "development",
+}) as {
+  port: string;
+  hostname: string;
+  development: "development" | "production";
 };
 
 export default {
-  async fetch(req: Request) {
-    const fallbackElement = (await import("./app/libs/components/CDNModules"))
-      .CDNModules;
+  async fetch(R: Request) {
+    const html = await Bun.peek(
+      await import("./app/routes/index").then((module) => module.default),
+    );
 
-    return await render(fallbackElement, req);
+    return await render(html, R);
   },
-  ...SERVER_OPTIONS({
-    port: process.env?.SERVER_PORT ?? "8080",
-    hostname: process.env?.SERVER_HOSTNAME ?? "0.0.0.0",
-    mode: "development",
-  }),
+  ...(options
+    ? {
+        port: options.port,
+        hostname: options.hostname,
+        development: options.development === "development",
+      }
+    : {}),
 };
