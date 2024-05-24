@@ -1,0 +1,36 @@
+run = "bun run dev"
+entrypoint = "server.tsx"
+hidden = [".config", "bun.lockb", "tsconfig.json"]
+modules = ["nodejs-20:v8-20230920-bd784b9"]
+
+[nix]
+channel = "stable-23_11"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]
+
+[deployment]
+run = { args = [
+	"bun",
+	"run",
+	"--port=8080",
+	"server.tsx",
+], env = { "NODE_ENV" = "production", "SERVER_PORT" = "8080", "SERVER_HOSTNAME" = "0.0.0.0" } }
+deploymentTarget = "cloudrun"
+ignorePorts = false
+publicDir = "public"
+
+[packager]
+language = "bunjs"
+
+[packager.features]
+packageSearch = true
+enabledForHosting = false
+guessImports = true
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[objectStorage]
+defaultBucketID = "replit-objstore-aae49ddc-3cb5-411c-80f1-c9c6137af561"

@@ -1,0 +1,26 @@
+jsx = "react-jsxDEV"
+jsxImportSource = "react"
+telemetry = false
+logLevel = "debug"
+smol = true
+publicPath = "/"
+root = "."
+target = "bun"
+format = "esm"
+
+[define]
+"Bun.__GYOZA_OUTDIR__" = "'.gyoza-cache'"
+
+[loader]
+".ts" = "ts"
+".tsx" = "tsx"
+".wasm" = "wasm"
+".css"= "css"
+".json" = "json"
+
+[run]
+shell = "system"
+bun = true
+
+[install.scopes]
+"@jsr" = "https://npm.jsr.io"
