@@ -1,0 +1,21 @@
+{
+  "name": "gyoza",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    "import": {
+      "client": {
+        "import": "./src/lib/entry-client.ts"
+      },
+      "server": {
+        "import": "./src/lib/entry-server.ts"
+      }
+    }
+  }
+}
