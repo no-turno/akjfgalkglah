@@ -1,7 +1,10 @@
 {
   "name": "gyoza",
-  "module": "index.ts",
+  "module": "src/index.ts",
   "type": "module",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {},
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -10,12 +13,7 @@
   },
   "exports": {
     "import": {
-      "client": {
-        "import": "./src/lib/entry-client.ts"
-      },
-      "server": {
-        "import": "./src/lib/entry-server.ts"
-      }
+      "default": "./src/index.ts"
     }
   }
 }
