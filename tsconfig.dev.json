@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"target": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"verbatimModuleSyntax": true,
+		"types": [
+			"bun"
+		],
+		"outDir": ".tmp"
+	},
+	"include": ["./gyoza.d.ts", "./.gyoza/**/*.ts"]
+}

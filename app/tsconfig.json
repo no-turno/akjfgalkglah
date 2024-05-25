@@ -1,5 +1,4 @@
 {
-	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
@@ -18,10 +17,10 @@
 		"paths": {
 			"@/*": ["./*"]
 		},
-		"composite":true
+		"emitBOM": true
 	},
-	"references": [{
-		"path": "./tsconfig.dev.json"
-	}],
-	"include": ["./**/*.tsx", "./**/*.ts", "**/*.d.ts"]
+	"include": [
+		"./app/**/*.ts",
+		"./app/**/*.tsx"
+	]
 }

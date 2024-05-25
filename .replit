@@ -36,3 +36,12 @@ localPort = 8080
 
 [objectStorage]
 defaultBucketID = "replit-objstore-aae49ddc-3cb5-411c-80f1-c9c6137af561"
+
+[rules]
+
+[rules.formatter]
+
+[rules.formatter.fileExtensions]
+
+[rules.formatter.fileExtensions.".json"]
+id = "module:nodejs-20/languageServer:typescript-language-server"

@@ -1,12 +1,13 @@
 {
-  "name": "nodejs-typescript",
-  "version": "1.0.0",
+  "name": "akjfgalkglah",
   "description": "",
-  "type": "module",
+  "workspaces": [
+    "{app,packages}/**"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "SERVER_PORT=3000 bun run --config=./bunfig.toml --watch ./server.tsx",
-    "format": "bunx @biomejs/biome format --write ./app ./.gyoza ./server.tsx"
+    "app:dev": "bun run --cwd=./app SERVER_PORT=3000 bun run --config=./bunfig.toml --watch ./server.tsx",
+    "app:format": "bun run --cwd=./app bunx @biomejs/biome format --write ./app ./.gyoza ./server.tsx",
+    "app:lint": "bun run --cwd=./app bunx @biomejs/biome lint --write ./app"
   },
   "author": "",
   "license": "ISC",
