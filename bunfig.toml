@@ -1,17 +1,9 @@
 jsx = "react-jsx"
 jsxImportSource = "react"
 telemetry = false
-publicPath = "/"
 
 [define]
 "Bun.__GYOZA_OUTDIR__" = "'.gyoza-cache'"
-
-[loader]
-".ts" = "ts"
-".tsx" = "tsx"
-".wasm" = "wasm"
-".css"= "css"
-".json" = "json"
 
 [run]
 shell = "system"

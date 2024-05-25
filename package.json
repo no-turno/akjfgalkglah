@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "SERVER_PORT=3000 bun run --config=./bunfig.toml --watch --server-components ./server.tsx"
+    "dev": "SERVER_PORT=3000 bun run --config=./bunfig.toml --watch ./server.tsx",
+    "format": "bunx @biomejs/biome format --write ./app ./.gyoza ./server.tsx"
   },
   "author": "",
   "license": "ISC",

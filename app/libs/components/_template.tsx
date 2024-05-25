@@ -1,20 +1,5 @@
-"use server";
+import React from "react";
 
-export default function Template({
-    children,
-    _template,
-}: {
-    children: React.ReactNode;
-    _template?: boolean;
-}) {
-    if (_template) return <>{children}</>;
-
-    return (
-        <html>
-            <head>
-                <title>app</title>
-            </head>
-            <body>{children}</body>
-        </html>
-    );
+export default function Template({ children }: { children: React.ReactNode }) {
+	return <>{children}</>;
 }

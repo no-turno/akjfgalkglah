@@ -10,20 +10,18 @@ import type { App } from "../gyoza";
  * @version 1.0.0
  */
 export async function REPLIT_CONFIG(options: {
-    generateTypes?: boolean;
+	generateTypes?: boolean;
 }): Promise<any> {
-    const config = Bun.TOML.parse(
-        await new Response(Bun.file(".replit")).text(),
-    );
+	const config = Bun.TOML.parse(await new Response(Bun.file(".replit")).text());
 
-    if (options.generateTypes) {
-        await Bun.write(
-            "types/replit.d.ts",
-            `export type ReplitConfig = ${Bun.inspect(config)}`,
-        );
-    }
+	if (options.generateTypes) {
+		await Bun.write(
+			"types/replit.d.ts",
+			`export type ReplitConfig = ${Bun.inspect(config)}`,
+		);
+	}
 
-    return config;
+	return config;
 }
 
 /**
@@ -35,15 +33,15 @@ export async function REPLIT_CONFIG(options: {
  * @version 1.0.0
  */
 export function SERVER_OPTIONS(options: {
-    port: string,
-    hostname: string,
-    mode: "development" | "production",
+	port: string;
+	hostname: string;
+	mode: "development" | "production";
 }) {
-    return {
-        port: options.port,
-        hostname: options.hostname,
-        development: options.mode,
-    };
+	return {
+		port: options.port,
+		hostname: options.hostname,
+		development: options.mode,
+	};
 }
 
 /**
@@ -55,11 +53,11 @@ export function SERVER_OPTIONS(options: {
  * @version 1.0.0
  */
 export function STORAGE_OPTIONS({
-    bucketId,
+	bucketId,
 }: {
-    bucketId?: string;
+	bucketId?: string;
 }): App.Storage["options"] {
-    return {
-        bucketId: process.env.REPLIT_DEFAULT_STORAGE_BUCKET_ID ?? bucketId,
-    };
+	return {
+		bucketId: process.env.REPLIT_DEFAULT_STORAGE_BUCKET_ID ?? bucketId,
+	};
 }

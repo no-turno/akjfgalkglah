@@ -1,17 +1,16 @@
-import Template from "../libs/components/_template";
-import Styles from "./_style";
+"use server";
 
-export default function Index() {
+import Styles from "./_style";
+export default async function Index() {
 	return (
-		<Template _template={true}>
-			<html>
-				<head>
-					<Styles />
-				</head>
-				<body>
-				app
-				</body>
-			</html>
-		</Template>
+		<html lang="en">
+			<head>
+				<title>app</title>
+			</head>
+			<body>
+				<Styles />
+				<p>hello</p>
+			</body>
+		</html>
 	);
 }

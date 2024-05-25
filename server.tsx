@@ -1,39 +1,46 @@
 import { renderToReadableStream } from "react-dom/server";
 import { SERVER_OPTIONS } from "./.gyoza/config";
 
+const js = String.raw;
+
 export const render = async (H: () => React.ReactElement, R: Request) => {
-  const html = await renderToReadableStream(<H />);
-  await html.allReady;
-  return new Response(html, {
-    headers: {
-      "Content-Type": "text/html",
-    },
-  });
+	const html = await renderToReadableStream(H(), {
+		get bootstrapScriptContent() {
+			return js`const env = ${Bun.inspect(Bun.env)}`;
+		},
+	});
+	return html;
 };
 
 const options = SERVER_OPTIONS({
-  port: process.env.SERVER_PORT,
-  hostname: process.env.SERVER_HOSTNAME,
-  mode: "development",
+	port: "3000",
+	hostname: process.env.SERVER_HOSTNAME,
+	mode: "development",
 }) as {
-  port: string;
-  hostname: string;
-  development: "development" | "production";
+	port: string;
+	hostname: string;
+	development: "development" | "production";
 };
 
-export default {
-  async fetch(R: Request) {
-    const html = await Bun.peek(
-      await import("./app/routes/index").then((module) => module.default),
-    );
+const HTML = await import("./app/routes/index").then(
+	(module) => module.default,
+);
 
-    return await render(html, R);
-  },
-  ...(options
-    ? {
-        port: options.port,
-        hostname: options.hostname,
-        development: options.development === "development",
-      }
-    : {}),
+const Entry = await HTML();
+
+export default {
+	...(options
+		? {
+				port: options.port,
+				hostname: options.hostname,
+			}
+		: {}),
+
+	async fetch(R: Request) {
+		return new Response(await render(() => Entry, R), {
+			headers: {
+				"content-type": "text/html; charset=utf-8",
+			},
+		});
+	},
 };
